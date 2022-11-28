@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block body %}
+    <h1>Edit Product</h1>
+
+    {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('product_index') }}">back to list</a>
+
+    {{ include('product/_delete_form.html.twig') }}
+
+	<h1>Operation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Part</th>
+                <th>Pays</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for operation in operations %}
+            <tr>
+                <td>{{ operation.name }}</td>
+            	{% for production in productions|filter(production => production.operation == operation) %}
+            		<td>
+            			<a href="{{ path('production_edit', {'id': production.id}) }}">
+            				{{ production.value }}
+            			</a>
+        			</td>
+        			<td>{{ production.country.name }}</td>
+            	{% else %}
+            		<td>
+            			<a href="{{ path('production_new_in_product', {'productId': product.id,'operationId': operation.id}) }}">
+            				pas encore enregistré
+            			</a>
+            		</td>
+            	{% endfor %}
+                <td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

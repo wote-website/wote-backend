@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Country index{% endblock %}
+
+{% block body %}
+    <h1>Country index</h1>
+    <a href="{{ path('profile_edit', {'id': profileId}) }}">retour au profil</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Name FR</th>
+                <th>rating score</th>
+                <th>2e score</th>
+                <th>transparency score</th>
+                <th>coverage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set rank = 1 %}
+
+            {% for country in countries|sort((a, b) => b.score|number_format(0, ',', ' ')  <=> a.score|number_format(0, ',', ' ')  ? : b.transparency <=> a.transparency )|filter(country => country.transparency >= 0.3) %}      
+                    <tr>
+                        <td>{{ rank }}</td>
+                        {% set rank = rank + 1 %}
+                        <td><a href="{{ path('country_show', {'id': country.id}) }}">{{ country.name }}</a></td>
+                        <td><a href="{{ path('country_show', {'id': country.id}) }}">{{ country.frName }}</a></td>
+                        <td>{{ country.score|number_format(0, ',', ' ') }}</td>
+
+                        {% for score in scores|filter(score => score.country == country) %}
+                            <td>{{ score.value }}</td>
+                        {% endfor %}
+
+                        <td>{{ (country.transparency*100)|number_format(0, ',', ' ') }} %</td>
+                        {% for score in scores|filter(score => score.country == country) %}
+                            <td>{{ score.coverage }}</td>
+                        {% endfor %}
+                    </tr>   
+
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found, check settings</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

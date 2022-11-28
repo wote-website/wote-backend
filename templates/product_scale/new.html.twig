@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ProductScale{% endblock %}
+
+{% block body %}
+    <h1>Create new ProductScale</h1>
+
+    {{ include('product_scale/_form.html.twig') }}
+
+    <a href="{{ path('product_scale_index') }}">back to list</a>
+{% endblock %}

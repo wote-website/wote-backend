@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Criterion{% endblock %}
+
+{% block body %}
+    <h1>Criterion</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ criterion.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ criterion.title }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ criterion.designation }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ criterion.description }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ criterion.code }}</td>
+            </tr>
+            <tr>
+                <th>Unit</th>
+                <td>{{ criterion.unit }}</td>
+            </tr>
+            <tr>
+                <th>Formula</th>
+                <td>{{ criterion.formula }}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{{ criterion.source }}</td>
+            </tr>
+            <tr>
+                <th>SourceLink</th>
+                <td>{{ criterion.sourceLink }}</td>
+            </tr>
+            <tr>
+                <th>SourceDescription</th>
+                <td>{{ criterion.sourceDescription }}</td>
+            </tr>
+            <tr>
+                <th>Rapport</th>
+                <td>{{ criterion.reportOriginalLink }}</td>
+            </tr>
+            <tr>
+                <th>Logo</th>
+                <td>
+                    {% if criterion.logoFilename %}
+                    <img src="{{ vich_uploader_asset(criterion, 'logoFile') | imagine_filter('logo_thumbnail') }}" alt="{{ criterion.source }}" width=300 />
+
+                    {% else %}
+                    <img src="{{ '/images/default/logo_wote.PNG' }}" alt="{{ criterion.source }}" width=300 />
+
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Name logo</th>
+                <td>{{ criterion.logoFilename }}</td>
+            </tr>
+            <tr>
+                <th>Original link for logo</th>
+                <td>{{ criterion.logoOriginalLink }}</td>
+            </tr>
+            <tr>
+                <th>Logo from source</th>
+                <td><img src="{{ criterion.logoOriginalLink }}" alt="{{ criterion.source }}" width=200px/></td>
+            </tr>
+            <tr>
+                <th>CreationDate</th>
+                <td>{{ criterion.creationDate ? criterion.creationDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ModificationDate</th>
+                <td>{{ criterion.modificationDate ? criterion.modificationDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ criterion.status ? criterion.status|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('theme_index') }}">back to list</a>
+
+    <a href="{{ path('criterion_edit', {'id': criterion.id}) }}">edit</a>
+
+    {{ include('criterion/_delete_form.html.twig') }}
+
+    {{ include('rating/index_per_criterion.html.twig') }}
+    
+{% endblock %}

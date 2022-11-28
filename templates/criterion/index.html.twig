@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Criterion index{% endblock %}
+
+{% block body %}
+    <h1>Criterion index</h1>
+
+        {% for theme in themes %}
+            <h2>{{ theme.title }}</h2>
+      
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Theme</th>
+                    <th>Title</th>
+                    <th>Designation</th>
+                    <th>Code</th>
+                    {# <th>Ratings quantity</th> #}
+                    <th>Unit</th>
+                    <th>Status</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for criterion in criteria|filter(criterion => criterion.theme == theme) %} 
+                <tr>
+                    <td>{{ criterion.id }}</td>
+                    <td>{{ criterion.theme.title }}</td>
+                    <td>{{ criterion.title }}</td>
+                    <td>{{ criterion.designation }}</td>
+                    <td>{{ criterion.code }}</td>
+                    {# <td>{{ criterion.ratings|length }}</td> #}
+                    <td>{{ criterion.unit }}</td>
+                    <td>{{ criterion.status ? criterion.status|json_encode : '' }}</td>
+                    <td>
+                        <a href="{{ path('criterion_show', {'id': criterion.id}) }}">show</a>
+                        <a href="{{ path('criterion_edit', {'id': criterion.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="12">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endfor %}
+    <a href="{{ path('criterion_new') }}">Create new</a>
+{% endblock %}

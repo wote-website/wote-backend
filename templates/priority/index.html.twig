@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Priority index{% endblock %}
+
+{% block body %}
+    <h1>Priority index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Theme</th>
+                <th>Priorité</th>
+                <th>Somme actuelle des critères</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for priority in priorities %}
+            <tr>
+                <td><a href="{{ path('priority_edit', {'id': priority.id}) }}">{{ priority.theme.title }}</a></td>
+                <td>{{ priority.value }}</td>
+                <td>{{ priority.priorizedWeightingsSum }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

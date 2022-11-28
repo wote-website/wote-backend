@@ -1,0 +1,37 @@
+    <h1>Rating index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Value</th>
+                <th>Source Index</th>
+                <th>Criterion</th>
+                <th>Weight</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for rating in ratings %}
+            {#
+                |sort((a, b) => b.ratingValue <=> a.ratingValue ?: a.country.name <=> b.country.name) %}
+            #}
+            <tr>
+                <td>{{ rating.id }}</td>
+                <td>{{ rating.ratingValue }}</td>
+                <td>{{ rating.sourceIndex }}</td>
+                <td>{{ rating.criterion.designation }}</td>
+                <td>
+                    {% for weight in rating.criterion.weightings %}
+                        {{ weight.value }}
+                    {% endfor %}
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>

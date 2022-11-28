@@ -1,0 +1,49 @@
+    <h1>{{ theme.title }}</h1>
+        
+
+            <h2></h2>
+            
+	        <table class="table">
+	            <thead>
+	                <tr>
+	                    <th>Code</th>
+	                    <th>Title</th>
+	                    <th>Designation</th>
+	                    <th>Pondération</th>
+	                    <th>Flag positif</th>
+	                    <th>Flag négatif</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+
+		            {% for criterion in theme.criteria %} 
+		                <tr>
+		                    <td>{{ criterion.code }}</td>
+		                    <td>{{ criterion.title }}</td>
+		                    <td>{{ criterion.designation }}</td>
+
+		                    
+		                    	{% for weighting in weightings|filter(weighting => weighting.criterion == criterion) %}
+		                    		<td>
+		                    			<a href="{{ path('weighting_edit', {'id': weighting.id}) }}">
+		                    				{{ weighting.value }}
+		                    			</a>
+	                    			</td>
+				                    <td>{{ weighting.positiveFlag }}</td>
+				                    <td>{{ weighting.negativeFlag }}</td>
+		                    	{% else %}
+		                    		<td>
+		                    			<a href="{{ path('weighting_new_in_priority', {'priorityId': priority.id,'criterionId': criterion.id}) }}">
+		                    				pas encore enregistré
+		                    			</a>
+		                    		</td>
+		                    	{% endfor %}
+
+		                </tr>
+		            {% else %}
+		                <tr>
+		                    <td colspan="12">no records found</td>
+		                </tr>
+		            {% endfor %}
+	            </tbody>
+	        </table>

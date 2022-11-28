@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weighting index{% endblock %}
+
+{% block body %}
+    <h1>Weighting index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Profile</th>
+                <th>Criterion</th>
+                <th>Value</th>
+                <th>CreationDate</th>
+                <th>ModificationDate</th>
+                <th>Comment</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for weighting in weightings %}
+            <tr>
+                <td>{{ weighting.id }}</td>
+                <td>{{ weighting.profile.title }}</td>
+                <td>{{ weighting.criterion.designation }}</td>
+                <td>{{ weighting.value }}</td>
+                <td>{{ weighting.creationDate ? weighting.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ weighting.modificationDate ? weighting.modificationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ weighting.comment }}</td>
+                <td>
+                    <a href="{{ path('weighting_show', {'id': weighting.id}) }}">show</a>
+                    <a href="{{ path('weighting_edit', {'id': weighting.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('weighting_new') }}">Create new</a>
+{% endblock %}

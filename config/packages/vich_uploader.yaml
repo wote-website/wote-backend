@@ -1,0 +1,12 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        criterion_logo:
+            uri_prefix: /images/criterion/logos
+            upload_destination: '%kernel.project_dir%/public/images/criterion/logos'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        criterion_report:
+            uri_prefix: /files/criterion/reports
+            upload_destination: '%kernel.project_dir%/public/files/criterion/reports'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

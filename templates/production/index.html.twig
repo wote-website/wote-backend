@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Production index{% endblock %}
+
+{% block body %}
+    <h1>Production index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Value</th>
+                <th>Comment</th>
+                <th>CreationDate</th>
+                <th>ModificationDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for production in productions %}
+            <tr>
+                <td>{{ production.id }}</td>
+                <td>{{ production.value }}</td>
+                <td>{{ production.comment }}</td>
+                <td>{{ production.creationDate ? production.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ production.modificationDate ? production.modificationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

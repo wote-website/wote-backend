@@ -1,0 +1,51 @@
+    <h1>Criterion index</h1>
+        
+
+	        {% for theme in themes %}
+            <h2>{{ theme.title }}</h2>
+            
+			{% set sum = 0 %}
+	        <table class="table">
+	            <thead>
+	                <tr>
+	                    <th>Code</th>
+	                    <th>Title</th>
+	                    <th>Designation</th>
+	                    <th>Pondération</th>
+	                    <th>Pondération priorisée</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+
+		            {% for criterion in criteria|filter(criterion => criterion.theme == theme) %} 
+		                <tr>
+		                    <td>{{ criterion.code }}</td>
+		                    <td>{{ criterion.title }}</td>
+		                    <td>{{ criterion.designation }}</td>
+
+		                    
+		                    	{% for weighting in weightings|filter(weighting => weighting.criterion == criterion) %}
+		                    		<td>
+		                    			<a href="{{ path('weighting_edit', {'id': weighting.id}) }}">
+		                    				{{ weighting.value }}
+		                    			</a>
+	                    			</td>
+		                    		<td>{{ weighting.priorizedValue }}</td>
+		                    		{% set sum = sum + weighting.value %}
+		                    	{% else %}
+		                    		<td>
+
+		                    				pas encore enregistré
+
+		                    		</td>
+		                    	{% endfor %}
+		                </tr>
+		            {% else %}
+		                <tr>
+		                    <td colspan="12">no records found</td>
+		                </tr>
+		            {% endfor %}
+	            </tbody>
+	        </table>
+	        <p>total des poids de ce thème : {{ sum }}</p>
+        {% endfor %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Priority{% endblock %}
+
+{% block body %}
+    <h1>Edit Priority</h1>
+
+    {{ include('priority/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <p>La somme des pondérations absolues de critères de cette priorité vaut : {{ priority.weightingsSum }}</p>
+
+    <a href="{{ path('profile_edit', {'id': priority.profile.id }) }}">back to list</a>
+
+    {{ include('criterion/index_in_priority.html.twig') }}
+{% endblock %}

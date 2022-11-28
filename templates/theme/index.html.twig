@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Theme index{% endblock %}
+
+{% block body %}
+    <h1>Theme index</h1>
+
+
+        {% for theme in themes %}
+            <h2><a href="{{ path('theme_show', {'id': theme.id}) }}">{{ theme.title }}</a></h2>
+            <p>{{ theme.description }}</p>
+
+            {% for criterion in theme.criteria %}
+                <p><a href="{{ path('criterion_show', {'id': criterion.id}) }}">{{ criterion.designation }}</a></p>
+            {% endfor %}
+
+        {% else %}
+            <p>no records found</p>
+        {% endfor %}
+
+
+    <a href="{{ path('theme_new') }}">Create new</a>
+{% endblock %}

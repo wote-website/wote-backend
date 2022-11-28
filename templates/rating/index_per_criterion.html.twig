@@ -1,0 +1,30 @@
+    <h1>Rating index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Value</th>
+                <th>Source Index</th>
+                <th>Country</th>
+                <th>Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for rating in ratings|sort((a, b) => b.ratingValue <=> a.ratingValue ?: a.country.name <=> b.country.name) %}
+
+            <tr>
+                <td>{{ rating.id }}</td>
+                <td>{{ rating.ratingValue }}</td>
+                <td>{{ rating.sourceIndex }}</td>
+                <td>{{ rating.country.name }}</td>
+                <td>{{ rating.ratingDate|date('Y-m-d') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>

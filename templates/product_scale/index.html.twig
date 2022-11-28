@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductScale index{% endblock %}
+
+{% block body %}
+    <h1>ProductScale index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Utilisateur</th>
+                <th>Profile</th>
+                <th>Produit</th>
+                <th>Score</th>
+                <th>Transparency</th>
+                <th>Status</th>
+                <th>Decision</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product_scale in product_scales %}
+            <tr>
+                <td>{{ product_scale.id }}</td>
+                <td>{{ product_scale.user.email }}</td>
+                <td>{{ product_scale.profile.title }}</td>
+                <td>{{ product_scale.product.name }}</td>
+                <td>{{ product_scale.score }}</td>
+                <td>{{ product_scale.transparency }}</td>
+                <td>{{ product_scale.status ? product_scale.status|json_encode : '' }}</td>
+                <td>{{ product_scale.decision ? product_scale.decision|json_encode : '' }}</td>
+                <td>
+                    <a href="{{ path('product_scale_show', {'id': product_scale.id}) }}">show</a>
+                    <a href="{{ path('product_scale_edit', {'id': product_scale.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('product_scale_new') }}">Create new</a>
+{% endblock %}

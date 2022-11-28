@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Report{% endblock %}
+
+{% block body %}
+    <h1>Report</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ report.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ report.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ report.description }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ report.createdAt ? report.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ report.updatedAt ? report.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Filename</th>
+                <td>{{ report.filename }}</td>
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td>{{ report.size }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>{{ report.link }}</td>
+            </tr>
+            <tr>
+                <th>Ouvrir</th>
+                <td><a href="{{ vich_uploader_asset(report, 'file')}}">ouvrir le rapport</a></td>
+            </tr>
+            <tr>
+                <th>OriginalLink</th>
+                <td>{{ report.originalLink }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('report_index') }}">back to list</a>
+
+    <a href="{{ path('report_edit', {'id': report.id}) }}">edit</a>
+
+    {{ include('report/_delete_form.html.twig') }}
+{% endblock %}

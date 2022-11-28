@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ProductScale{% endblock %}
+
+{% block body %}
+    <h1>Edit ProductScale</h1>
+
+    {{ include('product_scale/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('product_scale_index') }}">back to list</a>
+
+    {{ include('product_scale/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Standard{% endblock %}
+
+{% block body %}
+    <h1>Standard</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ standard.id }}</td>
+            </tr>
+            <tr>
+                <th>Value</th>
+                <td>{{ standard.value }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ standard.comment }}</td>
+            </tr>
+            <tr>
+                <th>CreationDate</th>
+                <td>{{ standard.creationDate ? standard.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ModificationDate</th>
+                <td>{{ standard.modificationDate ? standard.modificationDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('standard_index') }}">back to list</a>
+
+    <a href="{{ path('standard_edit', {'id': standard.id}) }}">edit</a>
+
+    {{ include('standard/_delete_form.html.twig') }}
+{% endblock %}

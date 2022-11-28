@@ -1,0 +1,39 @@
+<h1>Rating detail</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Thème</th>
+            <th>Cote du pays</th>
+            <th>Pondération dans le profil</th>
+            <th>Transparence</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        {% for priority in priorities %}
+            <tr>
+                <th>{{ priority.theme.title}}</th>
+                <th>{{ priority.score }}</th>
+                <th>{{ priority.value }}</th>
+                <th>{{ priority.transparency }}</th>
+            </tr>
+            {% for criterion in priority.theme.criteria %}
+                <tr>
+                    <td>{{ criterion.designation }}</td>
+                    <td>
+                        {% for rating in ratings|filter(rating => rating.criterion == criterion) %}
+                            {{ rating.ratingValue }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for weighting in weightings|filter(weighting => weighting.criterion == criterion) %}
+                            {{ weighting.value }}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+

@@ -1,0 +1,26 @@
+    <h1>Rating SUM</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Weighted Average</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for rating2 in ratings2 %}
+
+            <tr>
+           
+                <td>
+                        {{ rating2.weightedAverage }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>

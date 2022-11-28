@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Weighting{% endblock %}
+
+{% block body %}
+    <h1>Create new Weighting</h1>
+	
+	<h2>Critère : {{ criterion.designation }}</h2>
+	
+	<p>vous êtes dans la priorité {{ priority.theme.title }}</p>
+	<p>dans l'édition du profil : {{ priority.profile.title }} (id : {{ priority.profile.id }})</p>
+
+    {{ include('weighting/_form.html.twig') }}
+
+    <a href="{{ path('priority_edit', {'id': priority.id }) }}">back to list</a>
+{% endblock %}

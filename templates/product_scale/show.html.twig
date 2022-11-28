@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductScale{% endblock %}
+
+{% block body %}
+    <h1>ProductScale</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product_scale.id }}</td>
+            </tr>
+            <tr>
+                <th>CreationDate</th>
+                <td>{{ product_scale.creationDate ? product_scale.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ModificationDate</th>
+                <td>{{ product_scale.modificationDate ? product_scale.modificationDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Score</th>
+                <td>{{ product_scale.score }}</td>
+            </tr>
+            <tr>
+                <th>Transparency</th>
+                <td>{{ product_scale.transparency }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ product_scale.status ? product_scale.status|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Decision</th>
+                <td>{{ product_scale.decision ? product_scale.decision|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('product_scale_index') }}">back to list</a>
+
+    <a href="{{ path('product_scale_edit', {'id': product_scale.id}) }}">edit</a>
+
+    {{ include('product_scale/_delete_form.html.twig') }}
+{% endblock %}

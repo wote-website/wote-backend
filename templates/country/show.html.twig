@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Country{% endblock %}
+
+{% block body %}
+    <h1>{{ country.name }}</h1>
+    <h2>score du pays : {{ country.score }}</h2>
+    <h2>transparence du pays : {{ country.transparency }}</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Alpha3</th>
+                <td>{{ country.alpha3 }}</td>
+            </tr>
+            <tr>
+                <th>GdpPpp</th>
+                <td>{{ country.gdpPpp }}</td>
+            </tr>
+            <tr>
+                <th>GdpPppPerCapita</th>
+                <td>{{ country.gdpPppPerCapita }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><a href="{{ path('rated_country_index') }}">back to list</a></p>
+    <p><a href="{{ path('country_edit', {'id': country.id}) }}">modifier le pays lui même</a></p>
+
+    {{ include('country/_rating_detail.html.twig') }}
+
+
+{% endblock %}

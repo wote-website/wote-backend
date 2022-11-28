@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Weighting{% endblock %}
+
+{% block body %}
+    <h1>Create new Weighting</h1>
+
+    {{ include('weighting/_form.html.twig') }}
+
+    <a href="{{ path('weighting_index') }}">back to list</a>
+{% endblock %}

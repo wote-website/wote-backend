@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            <p>mon profil actif : <a href="{{ path('profile_show', {'id': app.user.activeProfile.id}) }}">{{ app.user.activeProfile.title }}</a></p>
+            <p>mes infos : <a href="{{ path('user_show', {'id': app.user.id}) }}">{{ app.user.email}}</a></p>
+        </div>
+        {% if app.user.activeProfile %}
+            Profil actif : {{ app.user.activeProfile.title }}
+       
+        {% endif %}
+        {% else %}
+            <p><a href="{{ path('app_login') }}">login</a></p>
+        {% endif %}
+
+        <nav>
+            <ul>
+                <li><a href="{{ path('criterion_index') }}">critères</a></li>
+                <li><a href="{{ path('theme_index') }}">thèmes</a></li>
+                <li><a href="{{ path('product_index') }}">produits</a></li>
+                <li><a href="{{ path('rated_country_index') }}">liste des pays</a></li>
+                <li><a href="{{ path('product_scale_index') }}">comparateur de produits</a></li>
+                <li><a href="{{ path('user_change_password') }}">changer de mot de passe</a></li>
+                <li><a href="{{ path('public_profile_index') }}">les profils publiques</a></li>
+
+
+                {% if is_granted('ROLE_USER')%}
+                    <li><a href="{{ path('personal_profile_index') }}">mes profils personnalisés</a></li>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMIN')%}
+                    <li><a href="{{ path('user_index') }}">utilisateurs</a></li>
+                    <li><a href="{{ path('profile_index') }}">profils</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+
+            {% block body %}{% endblock %}
+
+
+            {% block login_body %}{% endblock %}    
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
