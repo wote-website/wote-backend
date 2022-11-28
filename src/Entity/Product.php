@@ -79,7 +79,7 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"product:read"})
      */
     private $author;
@@ -111,6 +111,12 @@ class Product
      * @ORM\OneToMany(targetEntity=Score::class, mappedBy="product")
      */
     private $scores;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="products")
+     * @Groups({"product:read", "product:write"})
+     */
+    private $madeIn;
 
     public function __construct()
     {
@@ -333,6 +339,18 @@ class Product
                 $score->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMadeIn(): ?Country
+    {
+        return $this->madeIn;
+    }
+
+    public function setMadeIn(?Country $madeIn): self
+    {
+        $this->madeIn = $madeIn;
 
         return $this;
     }

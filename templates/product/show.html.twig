@@ -39,6 +39,13 @@
                 <th>Price</th>
                 <td>{{ product.price }}</td>
             </tr>
+            <tr>
+                <th>Made In</th>
+                <td>{% if product.madeIn %}
+                    {{ product.madeIn.name }}
+                    {% endif %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
