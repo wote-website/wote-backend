@@ -129,12 +129,18 @@ class Country
      */
     private $alpha2;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="madeIn")
+     */
+    private $products;
+
     public function __construct()
     {
         $this->ratings = new ArrayCollection();
         $this->productions = new ArrayCollection();
         $this->brands = new ArrayCollection();
         $this->scores = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -382,6 +388,37 @@ class Country
     public function setAlpha2(?string $alpha2): self
     {
         $this->alpha2 = $alpha2;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setMadeIn($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
+            // set the owning side to null (unless already changed)
+            if ($product->getMadeIn() === $this) {
+                $product->setMadeIn(null);
+            }
+        }
 
         return $this;
     }

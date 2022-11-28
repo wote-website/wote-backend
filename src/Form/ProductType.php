@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\Classification;
+use App\Entity\Country;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +23,10 @@ class ProductType extends AbstractType
             ->add('price')
             ->add('classification', EntityType::class, [
                 'class' => Classification::class,
+                'choice_label' => 'name'
+            ])
+            ->add('madeIn', EntityType::class, [
+                'class' => Country::class,
                 'choice_label' => 'name'
             ])
         ;
