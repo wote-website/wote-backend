@@ -17,17 +17,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     normalizationContext={"groups"={"product:read"}},
  *     denormalizationContext={"groups"={"product:write"}},
  *     collectionOperations={
- *         "get"={
- *             "security"="is_granted('ROLE_MEMBER')"
- *         },
- *         "post"={
- *             "security"="is_granted('ROLE_MEMBER')"
- *         },
+ *         "get"={},
+ *         "post"={},
  *     },
  *     itemOperations={
- *         "get"={
- *             "security"="is_granted('ROLE_MEMBER')"
- *         },
+ *         "get"={},
  *     }
  * )
  */
